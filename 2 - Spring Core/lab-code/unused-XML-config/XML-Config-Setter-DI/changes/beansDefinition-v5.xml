@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- Approach 1: Injection of collections of literal values directly -->
+
+	<bean id="collegeStudent"
+		class="com.workshop.setterdi.CollegeStudent">
+
+		<property name="favouritePlaces">
+			<list>
+				<value>New York</value>
+				<value>Paris</value>
+				<value>London</value>
+				<value>Bangkok</value>
+			</list>
+		</property>
+
+		<property name="subjectMarks">
+			<map>
+				<entry key="Maths" value="72" />
+				<entry key="Science" value="85" />
+				<entry key="History" value="39" />
+			</map>
+		</property>
+
+	</bean>
+
+
+</beans>
