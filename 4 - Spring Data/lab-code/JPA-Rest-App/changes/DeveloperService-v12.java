@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,7 @@ public class DeveloperService {
   
   public List<DeveloperDTO> getAllDevelopers() {
     
-    Iterable<Developer> devList = devRepo.findAll();
+    Iterable<Developer> devList = devRepo.findAll(Sort.by(Sort.Direction.ASC, "id"));
     log.info("Retrieved developers from database");
    
     return convertDeveloperListToDeveloperDTOList(devList);

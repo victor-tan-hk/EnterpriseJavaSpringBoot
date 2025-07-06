@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.workshop.jpa.dto.DeveloperDTO;
@@ -26,7 +27,7 @@ public class DeveloperService {
   public List<DeveloperDTO> getAllDevelopers() {
     
     List<DeveloperDTO> myDevs = new ArrayList<DeveloperDTO>();
-    Iterable<Developer> devList = devRepo.findAll();
+    Iterable<Developer> devList = devRepo.findAll(Sort.by(Sort.Direction.ASC, "id"));
     log.info("Retrieved developers from database");
     for (Developer dev : devList) {
       myDevs.add(new DeveloperDTO(dev));

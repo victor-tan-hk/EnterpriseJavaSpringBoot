@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.workshop.jpa.dto.DeveloperDTO;
@@ -32,7 +33,7 @@ public class DeveloperService {
   
   public List<DeveloperDTO> getAllDevelopers() {
     
-    Iterable<Developer> devList = devRepo.findAll();
+    Iterable<Developer> devList = devRepo.findAll(Sort.by(Sort.Direction.ASC, "id"));
     log.info("Retrieved developers from database");
    
     return convertDeveloperListToDeveloperDTOList(devList);
@@ -93,6 +94,7 @@ public class DeveloperService {
     
   }
   
+
   
   public List<DeveloperDTO> getWithParams(Map<String, String> allParams) {
     
@@ -105,20 +107,27 @@ public class DeveloperService {
     else {
       
       for (Map.Entry<String, String> entry : allParams.entrySet()) {
-        log.info(entry.getKey() + " : " + entry.getValue());
-        if (entry.getKey().equals(LANGUAGE_PARAM)) {
-          langValue = entry.getValue();
-        } else if (entry.getKey().equals(MARRIED_PARAM)) {
-          marriedValue = entry.getValue();
+        
+        String tempKey = entry.getKey();
+        String tempValue = entry.getValue();
+        log.info(tempKey + " : " + tempValue);
+        
+        if (tempKey.equals(LANGUAGE_PARAM)) {
+          
+          langValue = tempValue;
+        
+        } else if (tempKey.equals(MARRIED_PARAM)) {
+        
+          marriedValue = tempValue;
           if (!(marriedValue.toLowerCase().equals("true") || marriedValue.toLowerCase().equals("false")))
             throw new IncorrectURLFormatException( MARRIED_PARAM + " must be either true or false ");
-        }
+        } 
       
       }
       
       if (langValue != null && marriedValue != null) {
         
-        log.info("Retrieving all developers who can code in : " +langValue + " with marital status : " + marriedValue);
+        log.info("Retrieving developers who can code in : " +langValue + " with marital status : " + marriedValue);
         listToReturn = convertDeveloperListToDeveloperDTOList(devRepo.findByMarriedAndLanguagesContaining(Boolean.parseBoolean(marriedValue), langValue));
         
       } else if (langValue != null) {
@@ -131,13 +140,14 @@ public class DeveloperService {
         log.info("Retrieving all developers with marital status : " +marriedValue);
         listToReturn = convertDeveloperListToDeveloperDTOList(devRepo.findByMarried(Boolean.parseBoolean(marriedValue)));
 
-      }
+      } 
 
       return listToReturn;
 
     }
     
   }
+  
   
   private boolean isDeveloperValid(DeveloperDTO devDTO) {
     

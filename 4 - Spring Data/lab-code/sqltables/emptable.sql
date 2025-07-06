@@ -25,10 +25,12 @@ DROP TABLE IF EXISTS `employees`;
 CREATE TABLE `employees` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `start_date` date DEFAULT NULL,
+  `age` int DEFAULT NULL,
+  `gender` char(1) DEFAULT NULL,
+  `hire_date` date DEFAULT NULL,
   `salary` float DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +39,7 @@ CREATE TABLE `employees` (
 
 LOCK TABLES `employees` WRITE;
 /*!40000 ALTER TABLE `employees` DISABLE KEYS */;
-INSERT INTO `employees` VALUES (1,'Superman','1990-12-27',1200.12),(2,'Ironman','2010-06-01',2300.88),(3,'Wonder Woman','2018-10-15',3500.67);
+INSERT INTO `employees` VALUES (1,'Alice Johnson',28,'F','2020-05-10',4500),(2,'Bob Smith',35,'M','2018-08-15',5200.5),(3,'Charlie Lee',42,'M','2015-01-23',6100.75),(4,'Diana Prince',30,'F','2019-11-01',4750.25),(5,'Ethan Clark',26,'M','2021-07-19',4000);
 /*!40000 ALTER TABLE `employees` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-09-02  9:54:08
+-- Dump completed on 2025-07-06  7:55:26
